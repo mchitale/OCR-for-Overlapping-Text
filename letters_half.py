@@ -95,12 +95,12 @@ def build_nn(data,labels,test_data,test_labels):
     model.add(Activation('softmax'))
     
     #Stochastic Gradient Descent - 
-    sgd = SGD(lr=0.05, decay=1e-6, momentum=0.9, nesterov=True)
+    #sgd = SGD(lr=0.05, decay=1e-6, momentum=0.9, nesterov=True)
     
     one_hot_labels = keras.utils.to_categorical(labels, num_classes=26)
     ohl_test = keras.utils.to_categorical(test_labels, num_classes=26)
 
-    model.compile(optimizer=sgd,
+    model.compile(optimizer='rmsprop',
               loss='categorical_crossentropy',
               metrics=['accuracy'])
  
@@ -134,7 +134,7 @@ if __name__ == '__main__':
     #command line argument is a flag that tells us whether to take top 64
     #pixels or bottom 64 pixels.
     flag = sys.argv[1]
-    data = data_import("C:/Users/machital/Desktop/letter.tsv", flag)
+    data = data_import("C:/Users/machital/Desktop/OCR_Ovl/letter.tsv", flag)
 
     #Divide up the data into train, validation & test
     train_data, test_data = segregate_data(data)
